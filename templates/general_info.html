@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>King Classic: Info</title>
+		<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+		<meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+
+  <body>
+    <h2>General Information</h2>
+    <p><a href="#payment">Payment</a></p>
+    <p><a href="#lodging">Lodging</a></p>
+		<p><a href="#food">Food</a></p>
+    <p><a href="#rules">Rules & Format</a></p>
+    <p><a href="#golf">Courses, Pairings, & Tee Times</a></p>
+    <p><a href="#sidegames">Side Games</a></p>
+    <p><a href="#teams">Teams</a></p>
+		<p><a href="{{ url_for('index') }}">Home</a></p>
+    <br>
+    <section id="payment">
+      <h4>Payment</h4>
+			<div class="boxed">
+				<p>The total cost of the 4-night, 6-round trip is $1,365 plus tax. Everyone will pay upon arrival at the Mid Pines Inn.</p>
+			</div>
+    </section>
+		<br>
+		<a href="#">Back to top</a>
+    <br>
+		<br>
+    <section id="lodging">
+      <h4>Lodging</h4>
+			<div class="boxed">
+				<p>We are staying at the <b><a href="https://www.midpinesinn.com/accommodations/" target="_blank">Mid Pines Inn</a></b>. Double occupancy room assignments are listed below.</p>
+			</div>
+			<br>
+			<div>
+				<table>
+					<tr>
+						<th>Room 1</th>
+						<th>Room 2</th>
+						<th>Room 3</th>
+						<th>Room 4</th>
+					</tr>
+					<tr>
+						<td>Alex King</td>
+						<td>Stuart King</td>
+						<td>Jerry King</td>
+						<td>Chris Marsh</td>
+					</tr>
+					<tr>
+						<td>Zach Taylor</td>
+						<td>Patrick Hannahan</td>
+						<td>Reggie Sherrill</td>
+						<td>Rob Matiko</td>
+					</tr>
+				</table>
+			</div>
+    </section>
+		<br>
+		<a href="#">Back to top</a>
+    <br>
+		<br>
+		<section id="food">
+			<h4>Food</h4>
+			<div class="boxed">
+				<p>Breakfast, lunch, and dinner are included in our package. Specifics will be provide upon arrival with most meals anticipated to be in the Pine Needles and Mid Pines dining rooms.
+			</div>
+		</section>
+		<br>
+		<a href="#">Back to top</a>
+    <br>
+		<br>
+    <section id="rules">
+      <h4>Rules & Format</h4>
+			<div class="boxed">
+				<p>You must play all six rounds to be eligible to win the King Classic and have your name on the trophy. The winner will have the lowest <b>net score</b> over six rounds.</p>
+	      <p>The highest score you can card is +8 on a hole. Putt everything out and play everything down. All standard rules apply, including the local rule that allows you to drop and take a two-stroke penalty anywhere perpendicular to where a ball is lost or crossed the out of bounds line. Check out <b><a href="https://www.usga.org/content/usga/home-page/rules-hub/rules-modernization/major-changes/golfs-new-rules-stroke-and-distance.html" target="_blank">this video</a></b> for a more thorough explanation of the rule.</p>
+				<p>Initial handicaps must be verified, but do not need to be official. If you do not have a GHIN, there are several free apps that will calculate a handicap for you. <b><a href="https://www.thegrint.com/" target="_blank">The Grint</a></b> and <b><a href="https://www.swingbyswing.com/" target="_blank">Swing by Swing</a></b> are a few good ones.</p>
+				<p>Handicaps will <b>not</b> be adjusted based on performance during the trip. Rather, a course handicap is calculated for each round based on your initial index and the course rating and slope of the tees you elect to play. A course handicap is calculated as (H.I. x (slope / 113)) + (course rating - course par), rounded to the nearest integer. For example, if your index is 8.2 and you play from the Regular tees at Pine Needles (6,002 yards, 68.6 rating, 126 slope) your course handicap would be (8.2 x (126 / 113)) + (68.6 - 72) = 5.743 = 6. However, if you decided to play the Medal tees at Pine Needles (7,035 yards, 73.5 rating, 134 slope) your course handicap would be (8.2 x (134 / 113)) + (73.5 - 72) = 11.224 = 11. Each player will select the tees they wish to play from for each course prior to the trip. <b>Mid-trip changes to your selected tees are not allowed</b></p>
+				<p>Please review each course scorecard and select the tees you wish to play. Send <b><a href="mailto: sdking49@gmail.com">Stuart</a></b> your selected tees by May 12th.</p>
+				<p><a href="https://www.pineneedleslodge.com/wp-content/uploads/2023/01/Pine-Needles-Score-Card-2019-Brown.pdf" target="_blank">Pine Needles</a></p>
+				<p><a href="https://www.southernpinesgolfclub.com/wp-content/uploads/2022/03/scorecard-with-lost-hole.pdf" target="_blank">Southern Pines</a></p>
+				<p><a href="https://www.midpinesinn.com/wp-content/uploads/2023/01/Mid-Pines-Score-Card-2021.pdf" target="_blank">Mid Pines</a></p>
+			</div>
+    </section>
+		<br>
+		<a href="#">Back to top</a>
+		<br>
+		<br>
+    <section id="golf">
+      <p><b>Courses, Pairings, & Tee Times</b></p>
+			<p><a href="#d1r1">Sunday, Round 1 - Pine Needles</a></p>
+			<p><a href="#d1r2">Sunday, Round 2 - Pine Needles Replay</a></p>
+			<p><a href="#d2r1">Monday, Round 1 - Southern Pines</a></p>
+			<p><a href="#d2r2">Monday, Round 2 - Southern Pines Replay</a></p>
+			<p><a href="#d3r1">Tuesday, Round 1 - Mid Pines</a></p>
+			<p><a href="#d3r2">Tuesday, Round 2 - Mid Pines Replay</a></p>
+			<br>
+			<section id="d1r1">
+	      <p><b>Pine Needles</b></p>
+	      <p>Sunday, May 21</p>
+	      <p>Closest to the Pin: TBD</p>
+			</section>
+			<div>
+				<table>
+					<tr>
+						<th>Group 1</th>
+						<th>Group 2</td>
+					</tr>
+					<tr>
+						<td>Tee time: 8:00 AM</td>
+						<td>Tee time: 8:10 AM</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<a href="#golf">Back</a>
+			<br>
+			<br>
+			<section id="d1r2">
+				<p><b>Pine Needles Replay</b></p>
+	      <p>Sunday, May 21</p>
+	      <p>Closest to the Pin: TBD</p>
+			</section>
+			<div>
+				<table>
+					<tr>
+						<th>Group 1</th>
+						<th>Group 2</td>
+					</tr>
+					<tr>
+						<td>Tee time: 2:30 PM</td>
+						<td>Tee time: 2:40 PM</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<a href="#golf">Back</a>
+			<br>
+			<br>
+			<section id="d2r1">
+				<p><b>Southern Pines</b></p>
+	      <p>Monday, May 22</p>
+	      <p>Closest to the Pin: TBD</p>
+			</section>
+			<div>
+				<table>
+					<tr>
+						<th>Group 1</th>
+						<th>Group 2</td>
+					</tr>
+					<tr>
+						<td>Tee time: 8:03 AM</td>
+						<td>Tee time: 8:13 AM</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<a href="#golf">Back</a>
+			<br>
+			<br>
+			<section id="d2r2">
+				<p><b>Southern Pines Replay</b></p>
+	      <p>Monday, May 22</p>
+	      <p>Closest to the Pin: TBD</p>
+			</section>
+			<div>
+				<table>
+					<tr>
+						<th>Group 1</th>
+						<th>Group 2</td>
+					</tr>
+					<tr>
+						<td>Tee time: 2:33 PM</td>
+						<td>Tee time: 2:43 PM</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<a href="#golf">Back</a>
+			<br>
+			<br>
+			<section id="d3r1">
+	      <p><b>Mid Pines</b></p>
+	      <p>Tuesday, May 23</p>
+	      <p>Closest to the Pin: TBD</p>
+			</section>
+			<div>
+				<table>
+					<tr>
+						<th>Group 1</th>
+						<th>Group 2</td>
+					</tr>
+					<tr>
+						<td>Tee time: 8:05 AM</td>
+						<td>Tee time: 8:15 AM</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<a href="#golf">Back</a>
+			<br>
+			<br>
+			<section id="d3r2">
+	      <p><b>Mid Pines Replay</b></p>
+	      <p>Tuesday, May 23</p>
+	      <p>Closest to the Pin: TBD</p>
+			</section>
+			<div>
+				<table>
+					<tr>
+						<th>Group 1</th>
+						<th>Group 2</td>
+					</tr>
+					<tr>
+						<td>Tee time: 2:35 PM</td>
+						<td>Tee time: 2:45 PM</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+					<tr>
+						<td>TBD</td>
+						<td>TBD</td>
+					</tr>
+				</table>
+			</div>
+    </section>
+		<br>
+		<a href="#">Back to top</a>
+		<br>
+		<br>
+    <section id="sidegames">
+      <h4>Side Games</h4>
+			<div class="boxed">
+	      <p><b>Skins</b> are based on net low score, and are $5 per round ($30 total) and then split among the participants based on the number of skins won. Please note that if your handicap is greater than 18, for the skins game (and only for the skins game) your handicap will be adjusted to 18. <b>Closest to the pin</b> is $10 per round ($60 total) and all par 3s each round will have a winner. The payout will be based on the number of par 3s each round</p>
+			</div>
+    </section>
+		<br>
+		<a href="#">Back to top</a>
+		<br>
+		<br>
+    <section id="teams">
+      <h4>Teams</h4>
+			<div class="boxed">
+				<p>At the <b>end</b> of every round the 8 players will be randomly split into teams of two. The buy-in for this game is $5 per round ($30 total). The top two two-man teams with the lowest <b>net</b> combined score will win the cash prizes accordingly:</p>
+	      <p>First place: $30</p>
+	      <p>Second place: $10</p>
+				<p>Ties will result in the splitting of the relevant prizes. For example, a two-way tie for first will see those two teams each winning $20 ($30 + $10 = $40 / 2 = $20).</p>
+			</div>
+    </section>
+		<br>
+		<a href="#">Back to top</a>
+		<br>
+		<br>
+		<section id="gamesummary">
+      <h4>Side Game Summary</h4>
+			<div class="boxed">
+				<div>
+					<table>
+						<tr>
+							<th>Game</th>
+							<th>Buy-in</th>
+						</tr>
+						<tr>
+							<td>Skins</td>
+							<td>$30</td>
+						</tr>
+						<tr>
+							<td>Closest to the Pin</td>
+							<td>$60</td>
+						</tr>
+						<tr>
+							<td>Teams</td>
+							<td>$30</td>
+						</tr>
+						<tr>
+							<td><b>Total</b></td>
+							<td><b>$120</b></td>
+						</tr>
+					</table>
+				</div>
+				<section>
+		      <p>Alex is the bank, so settle up with him. The total for all the side games is $120. If you don't already have it, download and install <b><a href="https://venmo.com/" target="_blank">Venmo</a></b> on your phone to make money exchange quick and easy. If you don't use Venmo, please bring cash and pay Alex before play begins. He will settle up with you in the same manner that you use to buy in (i.e. Venmo or cash). Alex's Venmo handle is <b>@Alex-King.</b></p>
+				</section>
+			</div>
+		</section>
+		<br>
+		<a href="#">Back to top</a>
+		<br>
+		<h4><a href="{{ url_for('index') }}">Home</a></h4>
+  </body>
+</html>

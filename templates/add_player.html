@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>King Classic: Add Player</title>
+		<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+		<meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+	<body>
+    <h2>Add Player</h2>
+    <form action='/add_player' method='POST' id='submitform'>
+    First name:<br>
+    <input type="text" name="first_name"><br><br>
+    Last name:<br>
+    <input type="text" name="last_name"><br><br>
+		Handicap:<br>
+		<input type="text" name="hdcp"><br><br>
+		<!-- In skins?:
+    <select name="in_skins">
+      <option value="True">Yes</option>
+      <option value="False">No</option>
+    </select><br><br> -->
+		<table>
+			<tr>
+				<th>Course</th>
+				<th>Tee Selection</th>
+			</tr>
+			<tr>
+				<td>
+					<a href="https://www.pineneedleslodge.com/wp-content/uploads/2023/01/Pine-Needles-Score-Card-2019-Brown.pdf" target="_blank">Pine Needles</a>
+				</td>
+				<td>
+					<select name="tee1">
+						<option value="Medal">Medal (7,035 yards)</option>
+						<option value="Ross">Ross (6,435 yards)</option>
+						<option value="Regular">Regular (6,002 yards)</option>
+						<option value="Executive">Executive (5,605 yards)</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="https://www.pineneedleslodge.com/wp-content/uploads/2023/01/Pine-Needles-Score-Card-2019-Brown.pdf" target="_blank">Pine Needles Replay</a>
+				</td>
+				<td>
+					<select name="tee2">
+						<option value="Medal">Medal (7,035 yards)</option>
+						<option value="Ross">Ross (6,435 yards)</option>
+						<option value="Regular">Regular (6,002 yards)</option>
+						<option value="Executive">Executive (5,605 yards)</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="https://www.southernpinesgolfclub.com/wp-content/uploads/2022/03/scorecard-with-lost-hole.pdf" target="_blank">Southern Pines</a>
+				</td>
+				<td>
+					<select name="tee3">
+						<option value="Medal">Medal (6,695 yards)</option>
+						<option value="Blue">Blue (6,308 yards)</option>
+						<option value="White">White (5,954 yards)</option>
+						<option value="Gold">Gold (5,486 yards)</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="https://www.southernpinesgolfclub.com/wp-content/uploads/2022/03/scorecard-with-lost-hole.pdf" target="_blank">Southern Pines Replay</a>
+				</td>
+				<td>
+					<select name="tee4">
+						<option value="Medal">Medal (6,695 yards)</option>
+						<option value="Blue">Blue (6,308 yards)</option>
+						<option value="White">White (5,954 yards)</option>
+						<option value="Gold">Gold (5,486 yards)</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="https://www.midpinesinn.com/wp-content/uploads/2023/01/Mid-Pines-Score-Card-2021.pdf" target="_blank">Mid Pines</a>
+				</td>
+				<td>
+					<select name="tee5">
+						<option value="Blue">Blue (6,732 yards)</option>
+						<option value="White">White (6,166 yards)</option>
+						<option value="Green">Green (5,662 yards)</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="https://www.midpinesinn.com/wp-content/uploads/2023/01/Mid-Pines-Score-Card-2021.pdf" target="_blank">Mid Pines Replay</a>
+				</td>
+				<td>
+					<select name="tee6">
+						<option value="Blue">Blue (6,732 yards)</option>
+						<option value="White">White (6,166 yards)</option>
+						<option value="Green">Green (5,662 yards)</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+		<br>
+    <input type='submit' value="Submit"/>
+    </form>
+		<h4>{{msg|safe}}</h4>
+    <h4><a href="{{ url_for('index') }}">Home</a></h4>
+  </body>
+</html>
