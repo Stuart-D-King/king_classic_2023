@@ -14,7 +14,8 @@ import boto3
 def past_locations_map():
     m = folium.Map(location=[40, -98], zoom_start=5)
 
-    folium.Marker([33.455350, -83.241400], popup=folium.Popup('Greensboro, GA - Jerry King (2022), Stuart King (2021)', max_width=300), icon=folium.Icon(color='red', icon='asterisk')).add_to(m)
+    folium.Marker([35.174046, -79.392258], popup=folium.Popup('2023 - Southern Pines, NC', max_width=300), icon=folium.Icon(color='red', icon='asterisk')).add_to(m)
+    folium.Marker([33.455350, -83.241400], popup=folium.Popup('2021 & 2022 - Greensboro, GA - Stuart King, Jerry King', max_width=400)).add_to(m)
     folium.Marker([28.554899, -82.387863], popup=folium.Popup('2020 - Brooksville, FL - Josh Duckett', max_width=300)).add_to(m)
     folium.Marker([33.494171, -111.926048], popup=folium.Popup('2018 & 2019 - Scottsdale, AZ - Alex King', max_width=300)).add_to(m)
     folium.Marker([36.805531, -114.06719], popup=folium.Popup('2017 - Mesquite, NV - Alex King', max_width=300)).add_to(m)
@@ -237,8 +238,6 @@ class PlayGolf(object):
             with open(f_name, 'wb') as f:
                 pickle.dump(golfer, f)
 
-            # self.to_bucket(f_name)
-
 
     def add_score(self, player, course, hole, score):
         hdcp = self.calc_handicap(player, course)
@@ -250,8 +249,6 @@ class PlayGolf(object):
 
         with open(f_name, 'wb') as f:
             pickle.dump(golfer, f)
-
-        # self.to_bucket(f_name)
 
 
     def show_player_course_score(self, player, course, net=False):
@@ -294,14 +291,11 @@ class PlayGolf(object):
             to_par.append(tp)
             thru.append(tr)
 
-        # rank = list(rankdata(scores, method='min'))
         rank = list(rankdata(to_par, method='min'))
-        # rank = list(np.unique(scores, return_inverse=True)[1])
         results = list(zip(rank, names, to_par, thru, scores))
         sorted_results = sorted(results, key=lambda x: x[0])
 
         df = pd.DataFrame(sorted_results, columns=['Position', 'Name', 'To Par', 'Thru', 'Net Total'])
-        # df.set_index('Position', inplace=True)
 
         return df
 
@@ -329,7 +323,7 @@ class PlayGolf(object):
 
         df = pd.DataFrame(data=scores, index=names, columns=cols)
         low_scores = df.min(axis=0)
-        # skins = []
+
         skins_dct = defaultdict(list)
         for hole, low_score in zip(range(1, 19), low_scores):
             if low_score == 0:
@@ -369,7 +363,7 @@ class PlayGolf(object):
 
         names = [golfer.name for golfer in golfers]
         dct = dict(zip(names, golfers))
-        # pot = len(teams) * 20
+
         team_scores = []
         for (p1, p2) in teams:
             g1 = dct[p1]
@@ -394,20 +388,20 @@ class PlayGolf(object):
         second = [t for r,t,s in final_results if r == 2]
 
         if len(first) == 1 and len(second) == 1:
-            f_winnings = 30
-            s_winnings = 10
+            f_winnings = 50
+            s_winnings = 30
             df['Winnings'] = np.where(df['Position'] == 1, f_winnings, df['Winnings'])
             df['Winnings'] = np.where(df['Position'] == 2, s_winnings, df['Winnings'])
         elif len(first) == 2:
-            f_winnings = 40 / 2
+            f_winnings = 80 / 2
             df['Winnings'] = np.where(df['Position'] == 1, f_winnings, df['Winnings'])
         elif len(first) == 1  and len(second) > 1:
-            f_winnings = 30
-            s_winnings = 10 / len(second)
+            f_winnings = 50
+            s_winnings = 30 / len(second)
             df['Winnings'] = np.where(df['Position'] == 1, f_winnings, df['Winnings'])
             df['Winnings'] = np.where(df['Position'] == 2, s_winnings, df['Winnings'])
         elif len(first) > 2:
-            f_winnings = 40 / len(first)
+            f_winnings = 80 / len(first)
             df['Winnings'] = np.where(df['Position'] == 1, f_winnings, df['Winnings'])
 
         df['Winnings'] = df['Winnings'].map('${:,.2f}'.format)
@@ -518,106 +512,106 @@ class PlayGolf(object):
 
 
 if __name__ == '__main__':
-    past_locations_map()
-    # golf = PlayGolf()
-    #
-    # print('Adding players...')
-    # tees = {
-    #     'Pine Needles': 'Medal',
-    #     'Pine Needles Replay': 'Medal',
-    #     'Southern Pines': 'Medal',
-    #     'Southern Pines Replay': 'Medal',
-    #     'Mid Pines': 'Blue',
-    #     'Mid Pines Replay': 'Blue'
-    # }
-    #
-    # tees_ = {
-    #     'Pine Needles': 'Ross',
-    #     'Pine Needles Replay': 'Ross',
-    #     'Southern Pines': 'Blue',
-    #     'Southern Pines Replay': 'Blue',
-    #     'Mid Pines': 'White',
-    #     'Mid Pines Replay': 'White'
-    # }
-    #
-    # golf.add_player('Stuart King', 1.6, tees, True)
-    # print("Adding Stuart's scores...")
-    # for idx, _ in enumerate(range(18)):
-    #     golf.add_score('Stuart King', 'Pine Needles', idx+1, np.random.randint(3,7))
-    #     golf.add_score('Stuart King', 'Pine Needles Replay', idx+1, np.random.randint(3,7))
-    #     golf.add_score('Stuart King', 'Southern Pines', idx+1, np.random.randint(3,7))
-    #     golf.add_score('Stuart King', 'Southern Pines Replay', idx+1, np.random.randint(3,7))
-    #     golf.add_score('Stuart King', 'Mid Pines', idx+1, np.random.randint(3,7))
-    #     golf.add_score('Stuart King', 'Mid Pines Replay', idx+1, np.random.randint(3,7))
-    #
-    # golf.add_player('Alex King', 0.9, tees, True)
-    # print("Adding Alex's scores...")
-    # for idx, _ in enumerate(range(18)):
-    #     golf.add_score('Alex King', 'Pine Needles', idx+1, np.random.randint(3,7))
-    #     golf.add_score('Alex King', 'Pine Needles Replay', idx+1, np.random.randint(3,7))
-    #     golf.add_score('Alex King', 'Southern Pines', idx+1, np.random.randint(3,7))
-    #     golf.add_score('Alex King', 'Southern Pines Replay', idx+1, np.random.randint(3,7))
-    #     golf.add_score('Alex King', 'Mid Pines', idx+1, np.random.randint(3,7))
-    #     golf.add_score('Alex King', 'Mid Pines Replay', idx+1, np.random.randint(3,7))
-    #
-    # golf.add_player('Jerry King', 10.3, tees_, True)
-    # print("Adding Jerry's scores...")
-    # for idx, _ in enumerate(range(18)):
-    #     golf.add_score('Jerry King', 'Pine Needles', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Jerry King', 'Pine Needles Replay', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Jerry King', 'Southern Pines', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Jerry King', 'Southern Pines Replay', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Jerry King', 'Mid Pines', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Jerry King', 'Mid Pines Replay', idx+1, np.random.randint(3,8))
-    #
-    # golf.add_player('Reggie Sherrill', 11.1, tees_, True)
-    # print("Adding Reggie's scores...")
-    # for idx, _ in enumerate(range(18)):
-    #     golf.add_score('Reggie Sherrill', 'Pine Needles', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Reggie Sherrill', 'Pine Needles Replay', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Reggie Sherrill', 'Southern Pines', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Reggie Sherrill', 'Southern Pines Replay', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Reggie Sherrill', 'Mid Pines', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Reggie Sherrill', 'Mid Pines Replay', idx+1, np.random.randint(3,8))
-    #
-    # golf.add_player('Patrick Hannahan', 8.6, tees, True)
-    # print("Adding Patrick's scores...")
-    # for idx, _ in enumerate(range(18)):
-    #     golf.add_score('Patrick Hannahan', 'Pine Needles', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Patrick Hannahan', 'Pine Needles Replay', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Patrick Hannahan', 'Southern Pines', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Patrick Hannahan', 'Southern Pines Replay', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Patrick Hannahan', 'Mid Pines', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Patrick Hannahan', 'Mid Pines Replay', idx+1, np.random.randint(3,8))
-    #
-    #
-    # golf.add_player('Zach Taylor', 7.8, tees_, True)
-    # print("Adding Zach's scores...")
-    # for idx, _ in enumerate(range(18)):
-    #     golf.add_score('Zach Taylor', 'Pine Needles', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Zach Taylor', 'Pine Needles Replay', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Zach Taylor', 'Southern Pines', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Zach Taylor', 'Southern Pines Replay', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Zach Taylor', 'Mid Pines', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Zach Taylor', 'Mid Pines Replay', idx+1, np.random.randint(3,8))
-    #
-    #
-    # golf.add_player('Chris Marsh', 14.5, tees_, True)
-    # print("Adding Chris's scores...")
-    # for idx, _ in enumerate(range(18)):
-    #     golf.add_score('Chris Marsh', 'Pine Needles', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Chris Marsh', 'Pine Needles Replay', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Chris Marsh', 'Southern Pines', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Chris Marsh', 'Southern Pines Replay', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Chris Marsh', 'Mid Pines', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Chris Marsh', 'Mid Pines Replay', idx+1, np.random.randint(3,8))
-    #
-    # golf.add_player('Rob Matiko', 12.0, tees_, True)
-    # print("Adding Rob's scores...")
-    # for idx, _ in enumerate(range(18)):
-    #     golf.add_score('Rob Matiko', 'Pine Needles', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Rob Matiko', 'Pine Needles Relay', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Rob Matiko', 'Southern Pines', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Rob Matiko', 'Southern Pines Replay', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Rob Matiko', 'Mid Pines', idx+1, np.random.randint(3,8))
-    #     golf.add_score('Rob Matiko', 'Mid Pines Replay', idx+1, np.random.randint(3,8))
+    # past_locations_map()
+    golf = PlayGolf()
+
+    print('Adding players...')
+    tees = {
+        'Pine Needles': 'Medal',
+        'Pine Needles Replay': 'Medal',
+        'Southern Pines': 'Medal',
+        'Southern Pines Replay': 'Medal',
+        'Mid Pines': 'Blue',
+        'Mid Pines Replay': 'Blue'
+    }
+
+    tees_ = {
+        'Pine Needles': 'Ross',
+        'Pine Needles Replay': 'Ross',
+        'Southern Pines': 'Blue',
+        'Southern Pines Replay': 'Blue',
+        'Mid Pines': 'White',
+        'Mid Pines Replay': 'White'
+    }
+
+    golf.add_player('Stuart King', 1.6, tees, True)
+    print("Adding Stuart's scores...")
+    for idx, _ in enumerate(range(18)):
+        golf.add_score('Stuart King', 'Pine Needles', idx+1, np.random.randint(3,7))
+        golf.add_score('Stuart King', 'Pine Needles Replay', idx+1, np.random.randint(3,7))
+        golf.add_score('Stuart King', 'Southern Pines', idx+1, np.random.randint(3,7))
+        golf.add_score('Stuart King', 'Southern Pines Replay', idx+1, np.random.randint(3,7))
+        golf.add_score('Stuart King', 'Mid Pines', idx+1, np.random.randint(3,7))
+        golf.add_score('Stuart King', 'Mid Pines Replay', idx+1, np.random.randint(3,7))
+
+    golf.add_player('Alex King', 0.9, tees, True)
+    print("Adding Alex's scores...")
+    for idx, _ in enumerate(range(18)):
+        golf.add_score('Alex King', 'Pine Needles', idx+1, np.random.randint(3,7))
+        golf.add_score('Alex King', 'Pine Needles Replay', idx+1, np.random.randint(3,7))
+        golf.add_score('Alex King', 'Southern Pines', idx+1, np.random.randint(3,7))
+        golf.add_score('Alex King', 'Southern Pines Replay', idx+1, np.random.randint(3,7))
+        golf.add_score('Alex King', 'Mid Pines', idx+1, np.random.randint(3,7))
+        golf.add_score('Alex King', 'Mid Pines Replay', idx+1, np.random.randint(3,7))
+
+    golf.add_player('Jerry King', 10.3, tees_, True)
+    print("Adding Jerry's scores...")
+    for idx, _ in enumerate(range(18)):
+        golf.add_score('Jerry King', 'Pine Needles', idx+1, np.random.randint(3,8))
+        golf.add_score('Jerry King', 'Pine Needles Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Jerry King', 'Southern Pines', idx+1, np.random.randint(3,8))
+        golf.add_score('Jerry King', 'Southern Pines Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Jerry King', 'Mid Pines', idx+1, np.random.randint(3,8))
+        golf.add_score('Jerry King', 'Mid Pines Replay', idx+1, np.random.randint(3,8))
+
+    golf.add_player('Reggie Sherrill', 11.1, tees_, True)
+    print("Adding Reggie's scores...")
+    for idx, _ in enumerate(range(18)):
+        golf.add_score('Reggie Sherrill', 'Pine Needles', idx+1, np.random.randint(3,8))
+        golf.add_score('Reggie Sherrill', 'Pine Needles Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Reggie Sherrill', 'Southern Pines', idx+1, np.random.randint(3,8))
+        golf.add_score('Reggie Sherrill', 'Southern Pines Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Reggie Sherrill', 'Mid Pines', idx+1, np.random.randint(3,8))
+        golf.add_score('Reggie Sherrill', 'Mid Pines Replay', idx+1, np.random.randint(3,8))
+
+    golf.add_player('Patrick Hannahan', 8.6, tees, True)
+    print("Adding Patrick's scores...")
+    for idx, _ in enumerate(range(18)):
+        golf.add_score('Patrick Hannahan', 'Pine Needles', idx+1, np.random.randint(3,8))
+        golf.add_score('Patrick Hannahan', 'Pine Needles Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Patrick Hannahan', 'Southern Pines', idx+1, np.random.randint(3,8))
+        golf.add_score('Patrick Hannahan', 'Southern Pines Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Patrick Hannahan', 'Mid Pines', idx+1, np.random.randint(3,8))
+        golf.add_score('Patrick Hannahan', 'Mid Pines Replay', idx+1, np.random.randint(3,8))
+
+
+    golf.add_player('Zach Taylor', 7.8, tees_, True)
+    print("Adding Zach's scores...")
+    for idx, _ in enumerate(range(18)):
+        golf.add_score('Zach Taylor', 'Pine Needles', idx+1, np.random.randint(3,8))
+        golf.add_score('Zach Taylor', 'Pine Needles Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Zach Taylor', 'Southern Pines', idx+1, np.random.randint(3,8))
+        golf.add_score('Zach Taylor', 'Southern Pines Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Zach Taylor', 'Mid Pines', idx+1, np.random.randint(3,8))
+        golf.add_score('Zach Taylor', 'Mid Pines Replay', idx+1, np.random.randint(3,8))
+
+
+    golf.add_player('Chris Marsh', 14.5, tees_, True)
+    print("Adding Chris's scores...")
+    for idx, _ in enumerate(range(18)):
+        golf.add_score('Chris Marsh', 'Pine Needles', idx+1, np.random.randint(3,8))
+        golf.add_score('Chris Marsh', 'Pine Needles Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Chris Marsh', 'Southern Pines', idx+1, np.random.randint(3,8))
+        golf.add_score('Chris Marsh', 'Southern Pines Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Chris Marsh', 'Mid Pines', idx+1, np.random.randint(3,8))
+        golf.add_score('Chris Marsh', 'Mid Pines Replay', idx+1, np.random.randint(3,8))
+
+    golf.add_player('Rob Matiko', 12.0, tees_, True)
+    print("Adding Rob's scores...")
+    for idx, _ in enumerate(range(18)):
+        golf.add_score('Rob Matiko', 'Pine Needles', idx+1, np.random.randint(3,8))
+        golf.add_score('Rob Matiko', 'Pine Needles Relay', idx+1, np.random.randint(3,8))
+        golf.add_score('Rob Matiko', 'Southern Pines', idx+1, np.random.randint(3,8))
+        golf.add_score('Rob Matiko', 'Southern Pines Replay', idx+1, np.random.randint(3,8))
+        golf.add_score('Rob Matiko', 'Mid Pines', idx+1, np.random.randint(3,8))
+        golf.add_score('Rob Matiko', 'Mid Pines Replay', idx+1, np.random.randint(3,8))
