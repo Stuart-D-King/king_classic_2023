@@ -238,7 +238,7 @@ class PlayGolf(object):
             with open(f_name, 'wb') as f:
                 pickle.dump(golfer, f)
 
-            self.to_bucket(f_name)
+            # self.to_bucket(f_name)
 
 
     def add_score(self, player, course, hole, score):
@@ -252,7 +252,7 @@ class PlayGolf(object):
         with open(f_name, 'wb') as f:
             pickle.dump(golfer, f)
 
-        self.to_bucket(f_name)
+        # self.to_bucket(f_name)
 
 
     def show_player_course_score(self, player, course, net=False):
